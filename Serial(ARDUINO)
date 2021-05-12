@@ -1,0 +1,72 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(6, 7); // RX, TX
+double val = 0;
+String str = "";
+
+void setup() {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  // Open serial communications and wait for port to open:
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(9600);
+}
+
+void loop() { // run over and over
+    val = analogRead(A0);
+    if(mySerial.available())
+    {
+        char buf = mySerial.read();
+        if(buf != '\n')
+        {
+          str += buf;
+        }
+        else
+        {          
+          if(str.equals("ledon"))
+          {
+            digitalWrite(2, HIGH);
+            digitalWrite(3, HIGH);
+            str = "";
+          }
+          else if(str.equals("ledoff"))
+          {
+            digitalWrite(2, LOW);
+            digitalWrite(3, LOW);
+            str = "";
+          }
+         else if(str.equals("ledon2"))
+          {
+            digitalWrite(2, HIGH);
+            str = "";
+          }
+          else if(str.equals("ledoff2"))
+          {
+            digitalWrite(2, LOW);
+            str = "";
+          }
+          else if(str.equals("ledon3"))
+          {
+            digitalWrite(3, HIGH);
+            str = "";
+          }
+          else if(str.equals("ledoff3"))
+          {
+            digitalWrite(3, LOW);
+            str = "";
+          }
+          else
+          {
+            Serial.write(mySerial.read());
+            str = "";
+          }
+        }
+     }
+    if (Serial.available()) {
+    mySerial.write(Serial.read());
+  }
+}
