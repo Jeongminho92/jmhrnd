@@ -5,8 +5,8 @@ double val = 0;
 String str = "";
 
 void setup() {
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT); //led1
+  pinMode(3, OUTPUT); //led2
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
@@ -20,46 +20,46 @@ void loop() { // run over and over
     val = analogRead(A0);
     if(mySerial.available())
     {
-        char buf = mySerial.read();
+        char buf = mySerial.read(); //키보드 입력
         if(buf != '\n')
         {
           str += buf;
         }
         else
         {          
-          if(str.equals("ledon"))
+          if(str.equals("ledon")) //ledon 키보드 입력 시 led1, 2 on
           {
             digitalWrite(2, HIGH);
             digitalWrite(3, HIGH);
             str = "";
           }
-          else if(str.equals("ledoff"))
+          else if(str.equals("ledoff")) //ledoff 키보드 입력 시 led1, 2 off
           {
             digitalWrite(2, LOW);
             digitalWrite(3, LOW);
             str = "";
           }
-         else if(str.equals("ledon2"))
+         else if(str.equals("ledon1")) //ledon1 키보드 입력 시 led1 on
           {
             digitalWrite(2, HIGH);
             str = "";
           }
-          else if(str.equals("ledoff2"))
+          else if(str.equals("ledoff1")) //ledoff1 키보드 입력 시 led1 off
           {
             digitalWrite(2, LOW);
             str = "";
           }
-          else if(str.equals("ledon3"))
+          else if(str.equals("ledon2")) //ledon2 키보드 입력 시 led2 on 
           {
             digitalWrite(3, HIGH);
             str = "";
           }
-          else if(str.equals("ledoff3"))
+          else if(str.equals("ledoff2")) //ledoff2 키보드 입력 시 led2 off
           {
             digitalWrite(3, LOW);
             str = "";
           }
-          else
+          else //키보드 입력값 초기화
           {
             Serial.write(mySerial.read());
             str = "";
