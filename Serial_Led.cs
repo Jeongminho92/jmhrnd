@@ -133,7 +133,7 @@ namespace WindowsIotControl
         {
             richTextBoxReceive.Clear();
         }
-//led 밝기 조절
+//led 밝기 조절 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
