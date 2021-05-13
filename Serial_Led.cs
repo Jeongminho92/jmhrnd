@@ -112,7 +112,7 @@ namespace WindowsIotControl
                 SetTextCallback dp = new SetTextCallback(SwState);
                 this.Invoke(dp, new object[] { Text }); //콜벡한 대이터를 변환
             }
-            else
+            else //스위치 on off
             {         
 
                 if (Text.Substring(0, 5).Equals("sw_on"))
@@ -133,7 +133,7 @@ namespace WindowsIotControl
         {
             richTextBoxReceive.Clear();
         }
-
+//led 밝기 조절
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
