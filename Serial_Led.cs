@@ -63,7 +63,7 @@ namespace WindowsIotControl
                 richTextBoxReceive.Text = serialPort1.PortName + "  포트를 OPEN 할수 없습니다 \n";
             }
         }
-        
+         
         private void btnClosePort_Click(object sender, EventArgs e)
         {
             richTextBoxReceive.Text = serialPort1.PortName + "  포트를 CLOSE 합니다 \n";
